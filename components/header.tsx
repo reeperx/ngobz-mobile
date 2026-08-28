@@ -24,6 +24,8 @@ import { Button } from "@/components/ui/button";
 
 import { openQuoteModal } from "@/components/quote-modal";
 
+import { Camera } from "lucide-react";
+
 interface NavLinkItem {
   label: string;
   href: string;
@@ -39,13 +41,19 @@ const NAV_LINKS: NavLinkItem[] = [
     icon: Home,
   },
   {
-    label: "Showcase Gallery",
-    href: "#services",
-    description: "Authentic on-site event photos",
+    label: "Equipment",
+    href: "#equipment",
+    description: "Mobile chillers & commercial warmers",
     icon: Layers,
   },
   {
-    label: "Client Reviews",
+    label: "Live Gallery",
+    href: "#gallery",
+    description: "Authentic on-site event photos",
+    icon: Camera,
+  },
+  {
+    label: "Reviews",
     href: "#reviews",
     description: "5-star verified event testimonials",
     icon: ShieldCheck,
@@ -136,14 +144,14 @@ export function Header() {
           className="flex items-center gap-3 shrink-0 group select-none whitespace-nowrap"
           onClick={() => setMenuOpen(false)}
         >
-          <div className="relative h-10 w-10 sm:h-11 sm:w-11 rounded-xl overflow-hidden bg-white p-1 border border-slate-200 dark:border-slate-800 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+          <div className="relative h-10 w-10 sm:h-11 sm:w-11 rounded-full overflow-hidden bg-white p-1 border border-slate-200 shadow-sm group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
             <Image
               src={BUSINESS_INFO.logoUrl}
               alt="Ngobz Mobile Rentals Logo"
               width={44}
               height={44}
               priority
-              className="object-contain w-full h-full"
+              className="object-contain w-full h-full bg-white"
             />
           </div>
 
@@ -275,6 +283,18 @@ export function Header() {
 
                 {/* Unified Bottom Actions in Drawer */}
                 <div className="pt-4 border-t border-border/50 space-y-3">
+                  {/* Instant Quote Button */}
+                  <Button
+                    className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm gap-2 cursor-pointer shadow-md shadow-blue-600/25"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      openQuoteModal();
+                    }}
+                  >
+                    <Calculator className="h-4 w-4" />
+                    <span>Get Instant Quote</span>
+                  </Button>
+
                   {/* Direct Contact Links */}
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     <a

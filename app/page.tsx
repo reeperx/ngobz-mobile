@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { TrustLogos } from "@/components/trust-logos";
+import { FeatureGrid } from "@/components/feature-grid";
 import { ShowcaseGallery } from "@/components/showcase-gallery";
 import { CaseStudySlider } from "@/components/case-study-slider";
 import { FAQSection } from "@/components/faq-section";
@@ -15,6 +16,7 @@ export default function Home() {
       <main className="flex-1 space-y-4">
         <HeroSection />
         <TrustLogos />
+        <FeatureGrid />
         <ShowcaseGallery />
         <CaseStudySlider />
         <FAQSection />
