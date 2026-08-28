@@ -62,25 +62,15 @@ export function HeroSection() {
               </p>
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Button */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <Button
                 size="lg"
-                className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold h-12 sm:h-13 px-7 text-sm sm:text-base shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:scale-[1.01] transition-all cursor-pointer gap-2"
+                className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold h-12 sm:h-13 px-8 text-sm sm:text-base shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:scale-[1.01] transition-all cursor-pointer gap-2"
                 onClick={openQuoteModal}
               >
                 <Calculator className="h-4 w-4" />
                 <span>Get Instant Quote</span>
-              </Button>
-
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-xl border-emerald-600/30 bg-emerald-500/5 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-semibold h-12 sm:h-13 px-6 text-sm sm:text-base gap-2 cursor-pointer transition-all hover:scale-[1.01]"
-                onClick={() => window.open(whatsappHref, "_blank")}
-              >
-                <MessageCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                <span>WhatsApp Wandile</span>
               </Button>
             </div>
 

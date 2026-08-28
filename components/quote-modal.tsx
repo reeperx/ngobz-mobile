@@ -10,6 +10,7 @@ import {
   Snowflake,
   Flame,
   Bath,
+  Loader2,
 } from "lucide-react";
 import { BUSINESS_INFO, SERVICES } from "@/lib/business-data";
 import { Button } from "@/components/ui/button";
@@ -25,18 +26,19 @@ export function openQuoteModal() {
 
 export function QuoteModal() {
   const [isOpen, setIsOpen] = React.useState(false);
-  // Default to empty array - NO pre-selected items
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
   const [fullName, setFullName] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [eventDate, setEventDate] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [notes, setNotes] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   // Listen for global open event
   React.useEffect(() => {
     const handleOpen = () => {
       setIsOpen(true);
+      setIsSubmitting(false);
     };
     window.addEventListener("open-quote-modal", handleOpen);
     return () => window.removeEventListener("open-quote-modal", handleOpen);
@@ -45,7 +47,7 @@ export function QuoteModal() {
   // Close on Escape key & manage body scroll
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "Escape" && !isSubmitting) setIsOpen(false);
     };
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -57,7 +59,7 @@ export function QuoteModal() {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, isSubmitting]);
 
   const toggleItem = (id: string) => {
     setSelectedItems((prev) =>
@@ -67,24 +69,37 @@ export function QuoteModal() {
 
   const handleWhatsAppBooking = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     const serviceNames = SERVICES.filter((s) => selectedItems.includes(s.id))
       .map((s) => s.name)
       .join(", ");
 
-    const message = `*NEW BOOKING INQUIRY - NGOBZ MOBILE*
-----------------------------------
-*Name:* ${fullName || "Not provided"}
-*Phone:* ${phone || "Not provided"}
+    const message = `*NEW EVENT EQUIPMENT INQUIRY - NGOBZ MOBILE*
+----------------------------------------
+*Client Name:* ${fullName || "Not specified"}
+*Contact Number:* ${phone || "Not specified"}
 *Event Date:* ${eventDate || "To be confirmed"}
-*Location:* ${location || "Pretoria / Gauteng"}
-*Selected Equipment:* ${serviceNames || "None selected (General Inquiry)"}
-*Notes:* ${notes || "None"}
-----------------------------------
-Please confirm availability and send a quotation.`;
+*Event Location / Suburb:* ${location || "Pretoria / Gauteng"}
+*Selected Equipment:* ${serviceNames || "Custom Equipment Package"}
+*Special Notes / Timing:* ${notes || "None"}
+----------------------------------------
+_Please confirm availability and quotation for prompt 06:00 AM delivery._`;
 
     const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, "_blank");
-    setIsOpen(false);
+
+    setTimeout(() => {
+      window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, "_blank");
+      setIsSubmitting(false);
+      setIsOpen(false);
+      // Reset fields
+      setSelectedItems([]);
+      setFullName("");
+      setPhone("");
+      setEventDate("");
+      setLocation("");
+      setNotes("");
+    }, 600);
   };
 
   const getServiceIcon = (id: string) => {
@@ -102,12 +117,12 @@ Please confirm availability and send a quotation.`;
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsOpen(false)}
+            onClick={() => !isSubmitting && setIsOpen(false)}
             className="fixed inset-0 bg-black/80 backdrop-blur-sm"
             aria-hidden="true"
           />
 
-          {/* Modal Card - Sized properly with NO internal scrollbar */}
+          {/* Modal Card */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -136,15 +151,16 @@ Please confirm availability and send a quotation.`;
 
               <button
                 type="button"
+                disabled={isSubmitting}
                 onClick={() => setIsOpen(false)}
-                className="h-8 w-8 rounded-full bg-muted hover:bg-accent text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors cursor-pointer"
+                className="h-8 w-8 rounded-full bg-muted hover:bg-accent text-muted-foreground hover:text-foreground flex items-center justify-center transition-colors cursor-pointer disabled:opacity-50"
                 aria-label="Close modal"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Form Body - Compact & Clean without vertical scrollbars */}
+            {/* Form Body */}
             <form onSubmit={handleWhatsAppBooking} className="p-5 sm:p-6 space-y-4">
               {/* Step 1: Equipment Selection */}
               <div className="space-y-1.5">
@@ -158,8 +174,9 @@ Please confirm availability and send a quotation.`;
                       <button
                         type="button"
                         key={s.id}
+                        disabled={isSubmitting}
                         onClick={() => toggleItem(s.id)}
-                        className={`flex items-center justify-between p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                        className={`flex items-center justify-between p-2.5 rounded-xl border text-left transition-all cursor-pointer disabled:opacity-60 ${
                           isSelected
                             ? "border-blue-600 bg-blue-500/10 shadow-xs ring-1 ring-blue-500/20"
                             : "border-border/70 bg-background/60 hover:bg-accent/40"
@@ -199,6 +216,7 @@ Please confirm availability and send a quotation.`;
                     </label>
                     <Input
                       required
+                      disabled={isSubmitting}
                       placeholder="e.g. Gift Wandile"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
@@ -212,6 +230,7 @@ Please confirm availability and send a quotation.`;
                     </label>
                     <Input
                       required
+                      disabled={isSubmitting}
                       placeholder="e.g. 076 707 6120"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -225,6 +244,7 @@ Please confirm availability and send a quotation.`;
                     </label>
                     <Input
                       required
+                      disabled={isSubmitting}
                       type="date"
                       value={eventDate}
                       onChange={(e) => setEventDate(e.target.value)}
@@ -238,6 +258,7 @@ Please confirm availability and send a quotation.`;
                     </label>
                     <Input
                       required
+                      disabled={isSubmitting}
                       placeholder="e.g. Soshanguve, Pretoria"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
@@ -251,6 +272,7 @@ Please confirm availability and send a quotation.`;
                     Special Notes / Timing (Optional)
                   </label>
                   <Textarea
+                    disabled={isSubmitting}
                     placeholder="Guest count, delivery time preference..."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
@@ -264,10 +286,20 @@ Please confirm availability and send a quotation.`;
               <div className="pt-1">
                 <Button
                   type="submit"
-                  className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm gap-2 shadow-lg shadow-blue-600/25 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm gap-2 shadow-lg shadow-blue-600/25 cursor-pointer disabled:opacity-80"
                 >
-                  <MessageCircle className="h-4 w-4" />
-                  <span>Send Request to Wandile via WhatsApp</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      <span>Opening WhatsApp Inquiry...</span>
+                    </>
+                  ) : (
+                    <>
+                      <MessageCircle className="h-4 w-4" />
+                      <span>Send Request to Wandile via WhatsApp</span>
+                    </>
+                  )}
                 </Button>
                 <p className="text-[10px] text-center text-muted-foreground mt-1.5">
                   Mon-Sun: 06:00 - 20:00 • Fast confirmation • Pretoria &amp; Gauteng
