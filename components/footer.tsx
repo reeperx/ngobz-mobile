@@ -4,20 +4,18 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BUSINESS_INFO } from "@/lib/business-data";
-import { Phone, Mail, MapPin, MessageCircle, ExternalLink, ShieldCheck, Heart } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="border-t border-border/50 bg-background/95 pt-16 pb-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-border/40">
-          {/* Brand Column */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="relative h-11 w-11 overflow-hidden rounded-full border border-primary/30">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          {/* Logo & Tagline matching reference Image 1 */}
+          <div className="space-y-2">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="relative h-8 w-8 overflow-hidden rounded-full border border-border">
                 <Image
                   src={BUSINESS_INFO.logoUrl}
                   alt={BUSINESS_INFO.name}
@@ -25,120 +23,47 @@ export function Footer() {
                   className="object-cover"
                 />
               </div>
-              <span className="font-extrabold text-xl tracking-tight text-foreground">
-                {BUSINESS_INFO.name}
+              <span className="font-extrabold text-2xl tracking-tight text-foreground">
+                ngobz<span className="text-primary font-black text-3xl leading-none">.</span>
               </span>
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              {BUSINESS_INFO.slogan}. Delivering high-performance mobile coolers, warmers with chafing dishes, and VIP portable sanitation across Pretoria.
+            </Link>
+            <p className="text-xs text-muted-foreground max-w-xs">
+              Mobile coolers, food warmers & VIP sanitary hire across Pretoria.
             </p>
-            <div className="flex items-center gap-2 pt-1">
-              <Button
-                variant="outline"
-                size="sm"
-                className="gap-2 text-xs"
-                onClick={() => window.open(BUSINESS_INFO.facebookUrl, "_blank")}
-              >
-                <span>Facebook Page</span>
-                <ExternalLink className="h-3 w-3" />
-              </Button>
-            </div>
           </div>
 
-          {/* Equipment Hire */}
-          <div className="space-y-3">
-            <h4 className="font-bold text-sm text-foreground uppercase tracking-wider">
-              Equipment Hire
-            </h4>
-            <ul className="space-y-2 text-xs text-muted-foreground">
-              <li>
-                <a href="#services" className="hover:text-primary transition-colors">
-                  VIP & Standard Mobile Toilets
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-primary transition-colors">
-                  Mobile Refrigeration & Cold Rooms
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-primary transition-colors">
-                  Mobile Food Warmers & Chafing Trays
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-primary transition-colors">
-                  Weekend Event Rental Packages
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Coverage Areas */}
-          <div className="space-y-3">
-            <h4 className="font-bold text-sm text-foreground uppercase tracking-wider">
-              Service Hubs
-            </h4>
-            <ul className="space-y-1.5 text-xs text-muted-foreground">
-              <li>Soshanguve & Mabopane</li>
-              <li>Hammanskraal & Temba</li>
-              <li>Pretoria North & CBD</li>
-              <li>Ga-Rankuwa & Winterveld</li>
-              <li>Centurion & Mamelodi</li>
-            </ul>
-          </div>
-
-          {/* Direct Contact */}
-          <div className="space-y-3">
-            <h4 className="font-bold text-sm text-foreground uppercase tracking-wider">
-              Direct Contact
-            </h4>
-            <div className="space-y-2.5 text-xs text-muted-foreground">
-              <a
-                href={`tel:${BUSINESS_INFO.phone}`}
-                className="flex items-center gap-2 hover:text-foreground transition-colors"
-              >
-                <Phone className="h-3.5 w-3.5 text-primary shrink-0" />
-                <span>{BUSINESS_INFO.phone}</span>
-              </a>
-              <a
-                href={`mailto:${BUSINESS_INFO.email}`}
-                className="flex items-center gap-2 hover:text-foreground transition-colors"
-              >
-                <Mail className="h-3.5 w-3.5 text-primary shrink-0" />
-                <span>{BUSINESS_INFO.email}</span>
-              </a>
-              <div className="flex items-center gap-2">
-                <MapPin className="h-3.5 w-3.5 text-primary shrink-0" />
-                <span>{BUSINESS_INFO.location}</span>
-              </div>
-            </div>
-
-            <div className="pt-2">
-              <Button
-                variant="gradient"
-                size="sm"
-                className="w-full gap-2 text-xs"
-                onClick={() =>
-                  window.open(
-                    `https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=Hi%20NGOBZ%20Mobile,%20I'd%20like%20to%20inquire%20about%20renting%20equipment.`,
-                    "_blank"
-                  )
-                }
-              >
-                <MessageCircle className="h-3.5 w-3.5" />
-                <span>Chat on WhatsApp</span>
-              </Button>
-            </div>
+          {/* Minimalist 2-column footer links matching reference Image 1 */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-x-12 gap-y-3 text-xs text-muted-foreground">
+            <a href="#services" className="hover:text-foreground transition-colors">
+              Equipment
+            </a>
+            <a href="#benefits" className="hover:text-foreground transition-colors">
+              Features
+            </a>
+            <a href="#how-it-works" className="hover:text-foreground transition-colors">
+              How it Works
+            </a>
+            <a href="#faq" className="hover:text-foreground transition-colors">
+              FAQ
+            </a>
+            <a href="#calculator" className="hover:text-foreground transition-colors">
+              Quote Builder
+            </a>
+            <a
+              href={`https://wa.me/${BUSINESS_INFO.whatsappNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors font-semibold text-primary"
+            >
+              Contact Us
+            </a>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>© {currentYear} {BUSINESS_INFO.name}. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Built for excellence in event rentals
-          </p>
+        {/* Bottom Copyright line matching reference Image 1 */}
+        <div className="pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground gap-2">
+          <p>Copyright © {currentYear} {BUSINESS_INFO.name}</p>
+          <p>All Rights Reserved</p>
         </div>
       </div>
     </footer>
