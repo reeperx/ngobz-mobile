@@ -168,7 +168,7 @@ export function CaseStudySlider() {
               className="rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 h-11 text-xs sm:text-sm gap-2 cursor-pointer shadow-sm shrink-0"
               onClick={openQuoteModal}
             >
-              <span>Get Your Event Quote</span>
+              <span>Get Quote</span>
             </Button>
           </div>
         </div>

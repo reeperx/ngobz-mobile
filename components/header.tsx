@@ -283,18 +283,6 @@ export function Header() {
 
                 {/* Unified Bottom Actions in Drawer */}
                 <div className="pt-4 border-t border-border/50 space-y-3">
-                  {/* Instant Quote Button */}
-                  <Button
-                    className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm gap-2 cursor-pointer shadow-md shadow-blue-600/25"
-                    onClick={() => {
-                      setMenuOpen(false);
-                      openQuoteModal();
-                    }}
-                  >
-                    <Calculator className="h-4 w-4" />
-                    <span>Get Instant Quote</span>
-                  </Button>
-
                   {/* Direct Contact Links */}
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     <a

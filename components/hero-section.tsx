@@ -70,7 +70,7 @@ export function HeroSection() {
                 onClick={openQuoteModal}
               >
                 <Calculator className="h-4 w-4" />
-                <span>Get Instant Quote</span>
+                <span>Get Quote</span>
               </Button>
             </div>
 
