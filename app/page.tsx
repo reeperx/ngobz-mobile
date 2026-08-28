@@ -1,32 +1,28 @@
 import { Header } from "@/components/header";
-import { HeroSection } from "@/components/hero-section";
-import { KeyBenefits } from "@/components/key-benefits";
-import { HowItWorks } from "@/components/how-it-works";
-import { ServicesSection } from "@/components/services-section";
+import { HeroCard } from "@/components/hero-card";
+import { TrustLogos } from "@/components/trust-logos";
+import { FeatureGrid } from "@/components/feature-grid";
+import { ServicesNumbered } from "@/components/services-numbered";
 import { QuoteCalculator } from "@/components/quote-calculator";
-import { SafetyBanner } from "@/components/safety-banner";
-import { TestimonialsSection } from "@/components/testimonials-section";
-import { CtaBanner } from "@/components/cta-banner";
+import { CaseStudySlider } from "@/components/case-study-slider";
 import { FAQSection } from "@/components/faq-section";
-import { Footer } from "@/components/footer";
+import { DarkFooter } from "@/components/dark-footer";
 import { WhatsAppFloating } from "@/components/whatsapp-floating";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground selection:bg-primary/20 selection:text-primary">
+    <div className="flex min-h-screen flex-col bg-background text-foreground selection:bg-emerald-500/20 selection:text-emerald-600">
       <Header />
       <main className="flex-1 space-y-4">
-        <HeroSection />
-        <KeyBenefits />
-        <HowItWorks />
-        <ServicesSection />
+        <HeroCard />
+        <TrustLogos />
+        <FeatureGrid />
+        <ServicesNumbered />
         <QuoteCalculator />
-        <SafetyBanner />
-        <TestimonialsSection />
-        <CtaBanner />
+        <CaseStudySlider />
         <FAQSection />
       </main>
-      <Footer />
+      <DarkFooter />
       <WhatsAppFloating />
     </div>
   );
