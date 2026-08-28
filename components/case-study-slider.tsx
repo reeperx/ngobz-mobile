@@ -40,7 +40,7 @@ export function CaseStudySlider() {
   ];
 
   return (
-    <section className="py-20 border-b border-border/40 scroll-mt-20">
+    <section id="reviews" className="py-20 border-b border-border/40 scroll-mt-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight">

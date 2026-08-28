@@ -22,6 +22,8 @@ import { BUSINESS_INFO } from "@/lib/business-data";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 
+import { openQuoteModal } from "@/components/quote-modal";
+
 interface NavLinkItem {
   label: string;
   href: string;
@@ -29,7 +31,6 @@ interface NavLinkItem {
   icon: React.ElementType;
 }
 
-// Content sections only - "Get Quote" is reserved strictly for the dedicated CTA button
 const NAV_LINKS: NavLinkItem[] = [
   {
     label: "Home",
@@ -38,22 +39,16 @@ const NAV_LINKS: NavLinkItem[] = [
     icon: Home,
   },
   {
-    label: "Rental Services",
+    label: "Showcase Gallery",
     href: "#services",
-    description: "VIP Toilets, Coolers & Warmers",
+    description: "Authentic on-site event photos",
     icon: Layers,
   },
   {
-    label: "Why Choose Us",
-    href: "#features",
-    description: "Hygiene guarantee & reliable delivery",
+    label: "Client Reviews",
+    href: "#reviews",
+    description: "5-star verified event testimonials",
     icon: ShieldCheck,
-  },
-  {
-    label: "Quote Builder",
-    href: "#calculator",
-    description: "Calculate custom equipment packages",
-    icon: Calculator,
   },
   {
     label: "FAQs",

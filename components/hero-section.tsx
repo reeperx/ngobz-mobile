@@ -17,6 +17,7 @@ import {
 import { BUSINESS_INFO } from "@/lib/business-data";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { openQuoteModal } from "@/components/quote-modal";
 
 export function HeroSection() {
   const whatsappHref = `https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent(
@@ -47,38 +48,18 @@ export function HeroSection() {
             className="lg:col-span-6 xl:col-span-6 space-y-5 text-left"
           >
             {/* Main Catchy Headline */}
-            <div className="space-y-3">
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-foreground leading-[1.18] text-balance">
+            <div className="space-y-4">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-black tracking-tight text-foreground leading-[1.1] text-balance">
                 Hire Event Equipment With Ease.{" "}
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">
                   Keep Food Fresh &amp; Hot.
                 </span>
               </h1>
-              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium">
                 Heavy-duty mobile coolers chilling down to{" "}
                 <strong className="text-foreground font-semibold">-2°C</strong> and
                 commercial mobile food warmers complete with stainless steel chafing dishes delivered on time across Pretoria &amp; Gauteng.
               </p>
-            </div>
-
-            {/* Quick Value Points */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs sm:text-sm text-foreground/80">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                <span>Prompt 06:00 AM Morning Delivery</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-blue-500 shrink-0" />
-                <span>-2°C Deep Cold Hold Guaranteed</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-amber-500 shrink-0" />
-                <span>Chafing Dishes &amp; Inserts Included</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                <span>Zero Hidden Fees &amp; Direct WhatsApp</span>
-              </div>
             </div>
 
             {/* Action Buttons */}
@@ -86,7 +67,7 @@ export function HeroSection() {
               <Button
                 size="lg"
                 className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold h-12 sm:h-13 px-7 text-sm sm:text-base shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 hover:scale-[1.01] transition-all cursor-pointer gap-2"
-                onClick={() => scrollToSection("calculator")}
+                onClick={openQuoteModal}
               >
                 <Calculator className="h-4 w-4" />
                 <span>Get Instant Quote</span>

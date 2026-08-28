@@ -7,6 +7,8 @@ import { ArrowUpRight, CheckCircle2, Phone, Mail, MapPin, Sparkles } from "lucid
 import { BUSINESS_INFO } from "@/lib/business-data";
 import { Button } from "@/components/ui/button";
 
+import { openQuoteModal } from "@/components/quote-modal";
+
 export function DarkFooter() {
   const currentYear = new Date().getFullYear();
 
@@ -39,10 +41,7 @@ export function DarkFooter() {
             <div className="flex justify-start lg:justify-end">
               <Button
                 className="rounded-full bg-white hover:bg-slate-100 text-slate-950 font-bold px-8 h-12 text-xs sm:text-sm gap-2 shadow-xl cursor-pointer"
-                onClick={() => {
-                  const el = document.getElementById("calculator");
-                  el?.scrollIntoView({ behavior: "smooth" });
-                }}
+                onClick={openQuoteModal}
               >
                 <span>Get in touch</span>
                 <ArrowUpRight className="h-4 w-4" />
