@@ -1,5 +1,5 @@
 import { Header } from "@/components/header";
-import { HeroCard } from "@/components/hero-card";
+import { HeroSection } from "@/components/hero-section";
 import { TrustLogos } from "@/components/trust-logos";
 import { FeatureGrid } from "@/components/feature-grid";
 import { ServicesNumbered } from "@/components/services-numbered";
@@ -14,7 +14,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-background text-foreground selection:bg-emerald-500/20 selection:text-emerald-600">
       <Header />
       <main className="flex-1 space-y-4">
-        <HeroCard />
+        <HeroSection />
         <TrustLogos />
         <FeatureGrid />
         <ServicesNumbered />

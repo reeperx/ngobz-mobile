@@ -26,9 +26,10 @@ test.describe("Streamlined Mobile-First Navbar", () => {
     // Check items inside drawer (non-repetitive)
     await expect(mobileDialog.getByText("Rental Services")).toBeVisible();
     await expect(mobileDialog.getByText("Why Choose Us")).toBeVisible();
+    await expect(mobileDialog.getByText("Quote Builder")).toBeVisible();
     await expect(mobileDialog.getByText("FAQs")).toBeVisible();
-    await expect(mobileDialog.getByText("Contact")).toBeVisible();
-    await expect(mobileDialog.getByRole("button", { name: /Get Instant Quote/i })).toBeVisible();
+    await expect(mobileDialog.getByText("Call Us")).toBeVisible();
+    await expect(mobileDialog.getByText("WhatsApp")).toBeVisible();
 
     // Clicking an item closes drawer
     await mobileDialog.getByText("FAQs").click();
@@ -56,7 +57,7 @@ test.describe("Streamlined Mobile-First Navbar", () => {
     await expect(tabletDialog.getByText("Rental Services")).toBeVisible();
   });
 
-  test("desktop view (>=1024px) displays horizontal navbar and single dedicated Get Quote button", async ({ page }) => {
+  test("desktop view (>=1024px) displays horizontal navbar and single dedicated Contact button", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto("/");
 
@@ -66,8 +67,8 @@ test.describe("Streamlined Mobile-First Navbar", () => {
     await expect(desktopNav.getByText("Rental Services")).toBeVisible();
     await expect(desktopNav.getByText("Why Choose Us")).toBeVisible();
 
-    // Single dedicated Desktop "Get Quote" button
-    await expect(page.getByRole("button", { name: /Get Quote/i })).toBeVisible();
+    // Single dedicated Desktop "Contact" button
+    await expect(page.getByRole("button", { name: "Contact", exact: true })).toBeVisible();
 
     // Hamburger button is hidden
     await expect(page.getByRole("button", { name: /Open Menu|Close Menu/i })).toBeHidden();

@@ -1,4 +1,4 @@
-import { ServiceItem, Testimonial, FAQItem } from "./types";
+import { ServiceItem, Testimonial, FAQItem, HeroSlide } from "./types";
 
 export const BUSINESS_INFO = {
   name: "NGOBZ Mobile",
@@ -154,5 +154,32 @@ export const FAQS: FAQItem[] = [
     answer:
       "You can send an instant booking request through our online quote builder or WhatsApp us directly at +27 76 707 6120 with your event date and location.",
     category: "Booking",
+  },
+];
+
+export const HERO_CAROUSEL_SLIDES: HeroSlide[] = [
+  {
+    id: "mobile-coolers",
+    title: "Heavy-Duty Mobile Coolers & Cold Rooms",
+    tag: "Chillers & Cold Storage",
+    specPill: "-2°C Rapid Chill Guaranteed",
+    specPillIcon: "snowflake",
+    description:
+      "Dual-axle industrial refrigeration trailers keeping meats fresh and beverages ice-cold for 50 to 1,000+ guests.",
+    image: "/images/hero/mobile-cooler-trailer.jpg",
+    badge: "Top Rental",
+    targetServiceId: "mobile-coolers",
+  },
+  {
+    id: "mobile-warmers",
+    title: "Commercial Mobile Food Warmers",
+    tag: "Heated Bain-Marie & Chafing Stations",
+    specPill: "Includes Full Chafing Dish Set",
+    specPillIcon: "flame",
+    description:
+      "Keep wedding and ceremony feasts steaming hot and appetizing from start to finish with multi-tray heated units.",
+    image: "/images/hero/mobile-food-warmer.jpg",
+    badge: "Catering Ready",
+    targetServiceId: "mobile-warmers",
   },
 ];

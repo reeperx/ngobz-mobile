@@ -38,3 +38,15 @@ export interface QuoteRequest {
   durationDays: number;
   notes?: string;
 }
+
+export interface HeroSlide {
+  id: string;
+  title: string;
+  tag: string;
+  specPill: string;
+  specPillIcon: "snowflake" | "sparkles" | "flame" | "shield";
+  description: string;
+  image: string;
+  badge: string;
+  targetServiceId: string;
+}

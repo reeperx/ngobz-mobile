@@ -50,16 +50,16 @@ const NAV_LINKS: NavLinkItem[] = [
     icon: ShieldCheck,
   },
   {
+    label: "Quote Builder",
+    href: "#calculator",
+    description: "Calculate custom equipment packages",
+    icon: Calculator,
+  },
+  {
     label: "FAQs",
     href: "#faq",
     description: "Delivery times, bookings & coverage",
     icon: HelpCircle,
-  },
-  {
-    label: "Contact",
-    href: "#contact",
-    description: "Pretoria, Soshanguve, Mabopane & more",
-    icon: MapPin,
   },
 ];
 
@@ -193,9 +193,9 @@ export function Header() {
           <Button
             size="sm"
             className="hidden lg:inline-flex rounded-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-5 h-10 shadow-sm text-xs sm:text-sm gap-1.5 cursor-pointer whitespace-nowrap"
-            onClick={() => handleNavClick("#calculator")}
+            onClick={() => handleNavClick("#contact")}
           >
-            <span>Get Quote</span>
+            <span>Contact</span>
             <ArrowUpRight className="h-4 w-4" />
           </Button>
 
@@ -280,16 +280,6 @@ export function Header() {
 
                 {/* Unified Bottom Actions in Drawer */}
                 <div className="pt-4 border-t border-border/50 space-y-3">
-                  {/* Dedicated Primary Quote CTA */}
-                  <Button
-                    size="lg"
-                    className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold h-11 text-sm gap-2 shadow-sm"
-                    onClick={() => handleNavClick("#calculator")}
-                  >
-                    <Calculator className="h-4 w-4" />
-                    <span>Get Instant Quote</span>
-                  </Button>
-
                   {/* Direct Contact Links */}
                   <div className="grid grid-cols-2 gap-2 pt-1">
                     <a
