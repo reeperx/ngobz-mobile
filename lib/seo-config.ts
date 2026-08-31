@@ -1,0 +1,62 @@
+export const SEO_CONFIG = {
+  siteName: "NGOBZ Mobile Event Rentals",
+  siteUrl: "https://ngobzmobile.co.za",
+  title: "NGOBZ Mobile | Mobile Coolers, Warmers & VIP Mobile Toilets Pretoria",
+  titleTemplate: "%s | NGOBZ Mobile Event Rentals",
+  description:
+    "Top-rated event equipment hire in Pretoria, Soshanguve, Mabopane & Hammanskraal. Fast 06:00 AM delivery for heavy-duty mobile coolers (-2°C), commercial food warmers with chafing dishes, and spotless VIP mobile toilets.",
+  phone: "+27 76 707 6120",
+  whatsappNumber: "27767076120",
+  email: "giftwandile1@gmail.com",
+  location: {
+    city: "Pretoria",
+    region: "Gauteng",
+    country: "South Africa",
+    countryCode: "ZA",
+    latitude: -25.7479,
+    longitude: 28.2293,
+  },
+  openingHours: "Mo-Su 06:00-20:00",
+  priceRange: "R500 - R5000",
+  socials: {
+    facebook: "https://web.facebook.com/people/NGOBZ-mobile/100057655171100/",
+  },
+  keywords: [
+    // Core Brand & Intent
+    "NGOBZ Mobile",
+    "NGOBZ Mobile Event Rentals",
+    "event equipment hire Pretoria",
+    "party equipment rental Gauteng",
+    // Mobile Coolers & Cold Rooms
+    "mobile cooler rental Pretoria",
+    "mobile cold room hire Soshanguve",
+    "meat chiller trailer rental Mabopane",
+    "mobile fridge hire Hammanskraal",
+    "drink chiller trailer hire Centurion",
+    "dual axle mobile cold room hire",
+    "beer and meat cooler trailer Pretoria",
+    // Mobile Warmers & Chafing Dishes
+    "mobile food warmer rental Pretoria",
+    "commercial food warmer hire Soshanguve",
+    "chafing dish hire Pretoria",
+    "bain marie trailer rental Mabopane",
+    "wedding food warmer hire Gauteng",
+    "catering hot box trailer hire",
+    "mobile buffet warmer station Pretoria",
+    // VIP Mobile Toilets & Restrooms
+    "VIP mobile toilets Pretoria",
+    "portable toilet hire Soshanguve",
+    "luxury restroom trailer Mabopane",
+    "flush portable toilet hire Hammanskraal",
+    "VIP mobile toilets for weddings Gauteng",
+    "sanitized portable toilets hire Mamelodi",
+    "event sanitation solutions Pretoria",
+    // Township & Local Searches
+    "equipment hire Soshanguve Block L",
+    "event rentals Mabopane Central",
+    "catering hire Hammanskraal West",
+    "equipment hire Ga-Rankuwa",
+    "party hire Akasia",
+    "memorial service equipment hire Pretoria",
+  ],
+};

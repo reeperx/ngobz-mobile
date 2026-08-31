@@ -8,10 +8,12 @@ import { FAQSection } from "@/components/faq-section";
 import { DarkFooter } from "@/components/dark-footer";
 import { WhatsAppFloating } from "@/components/whatsapp-floating";
 import { QuoteModal } from "@/components/quote-modal";
+import { JsonLd } from "@/components/seo/json-ld";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground selection:bg-emerald-500/20 selection:text-emerald-600">
+    <div className="flex min-h-screen flex-col bg-background text-foreground selection:bg-blue-500/20 selection:text-blue-600">
+      <JsonLd />
       <Header />
       <main className="flex-1 space-y-4">
         <HeroSection />
