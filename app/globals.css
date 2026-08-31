@@ -14,35 +14,35 @@
     --secondary-foreground: 222 47% 11%;
     --muted: 214 32% 96%;
     --muted-foreground: 215 16% 47%;
-    --accent: 217 91% 96%; /* Clean cool blue tint (no red/brown) */
+    --accent: 217 91% 96%;
     --accent-foreground: 221 83% 45%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 214 32% 90%;
     --input: 214 32% 90%;
     --ring: 221 83% 53%;
-    --radius: 1.5rem;
+    --radius: 1.25rem;
   }
 
   .dark {
-    --background: 222 47% 7%; /* Deep navy slate #0b1120 */
+    --background: 222 47% 6%; /* Ultra-deep navy slate */
     --foreground: 210 40% 98%;
-    --card: 222 47% 10%; /* Polished card #0f172a */
+    --card: 222 47% 9%;
     --card-foreground: 210 40% 98%;
-    --popover: 222 47% 10%;
+    --popover: 222 47% 9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%; /* Vibrant Royal Blue in dark mode */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 222 47% 14%;
+    --secondary: 222 47% 12%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 222 47% 14%;
+    --muted: 222 47% 13%;
     --muted-foreground: 215 20% 65%;
-    --accent: 222 47% 15%; /* Deep cool slate blue (no red/brown) */
+    --accent: 222 47% 14%;
     --accent-foreground: 217 91% 70%;
     --destructive: 0 63% 45%;
     --destructive-foreground: 0 0% 100%;
-    --border: 222 47% 18%;
-    --input: 222 47% 18%;
+    --border: 222 47% 16%;
+    --input: 222 47% 16%;
     --ring: 217 91% 60%;
   }
 }
@@ -76,4 +76,13 @@ html {
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  overflow-x: hidden;
+}
+
+/* Glassmorphic backdrop utility */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }

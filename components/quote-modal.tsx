@@ -12,6 +12,10 @@ import {
   Bath,
   Loader2,
   CheckCircle2,
+  MapPin,
+  Calendar,
+  Sparkles,
+  MessageCircle,
 } from "lucide-react";
 import { toast } from "sonner";
 import { BUSINESS_INFO, SERVICES } from "@/lib/business-data";
@@ -26,13 +30,33 @@ export function openQuoteModal() {
   }
 }
 
+const POPULAR_TOWNSHIPS = [
+  "Soshanguve",
+  "Mabopane",
+  "Hammanskraal",
+  "Ga-Rankuwa",
+  "Centurion",
+  "Pretoria Central",
+  "Mamelodi",
+  "Akasia",
+  "Winterveld"
+];
+
+const EVENT_TYPES = [
+  "Wedding / Traditional Ceremony",
+  "Memorial Service / Funeral",
+  "Birthday / Milestone Party",
+  "Corporate / Community Gathering",
+];
+
 export function QuoteModal() {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
+  const [selectedItems, setSelectedItems] = React.useState<string[]>(["mobile-coolers"]);
+  const [eventType, setEventType] = React.useState("Wedding / Traditional Ceremony");
   const [fullName, setFullName] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [eventDate, setEventDate] = React.useState("");
-  const [location, setLocation] = React.useState("");
+  const [location, setLocation] = React.useState("Soshanguve");
   const [notes, setNotes] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSubmitted, setIsSubmitted] = React.useState(false);
@@ -81,10 +105,11 @@ export function QuoteModal() {
 
     const message = `*NEW EVENT EQUIPMENT INQUIRY - NGOBZ MOBILE*
 ----------------------------------------
-*Client Name:* ${fullName || "Not specified"}
+*Client Name:* ${fullName || "Event Host"}
 *Contact Number:* ${phone || "Not specified"}
-*Event Date:* ${eventDate || "To be confirmed"}
-*Event Location / Suburb:* ${location || "Pretoria / Gauteng"}
+*Event Type:* ${eventType}
+*Event Date:* ${eventDate || "Upcoming Date"}
+*Venue Location:* ${location || "Pretoria / Gauteng"}
 *Selected Equipment:* ${serviceNames || "Custom Equipment Package"}
 *Special Notes / Timing:* ${notes || "None"}
 ----------------------------------------
@@ -97,27 +122,19 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
       setIsSubmitting(false);
       setIsSubmitted(true);
 
-      // Toast notification from sonner
       toast.success("Quote Request Sent via WhatsApp!", {
         description: "Wandile will confirm equipment availability shortly.",
       });
 
-      // Auto-close modal after 2.5 seconds
       setTimeout(() => {
         setIsOpen(false);
         setIsSubmitted(false);
-        setSelectedItems([]);
-        setFullName("");
-        setPhone("");
-        setEventDate("");
-        setLocation("");
-        setNotes("");
       }, 2500);
-    }, 600);
+    }, 500);
   };
 
   const getServiceIcon = (id: string) => {
-    if (id.includes("cooler")) return <Snowflake className="h-4 w-4 text-cyan-500" />;
+    if (id.includes("cooler")) return <Snowflake className="h-4 w-4 text-sky-500" />;
     if (id.includes("warmer")) return <Flame className="h-4 w-4 text-amber-500" />;
     return <Bath className="h-4 w-4 text-emerald-500" />;
   };
@@ -132,16 +149,16 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => !isSubmitting && setIsOpen(false)}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/80 backdrop-blur-md"
             aria-hidden="true"
           />
 
           {/* Modal Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 12 }}
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 12 }}
-            transition={{ type: "spring", damping: 25, stiffness: 320 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="relative w-full max-w-lg bg-card border border-border/80 rounded-3xl shadow-2xl overflow-hidden z-10 my-auto text-left"
             role="dialog"
             aria-modal="true"
@@ -150,15 +167,15 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
             {/* Header */}
             <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-border/60 bg-accent/20">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                  <Calculator className="h-4.5 w-4.5" />
+                <div className="h-10 w-10 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-500/20">
+                  <Calculator className="h-5 w-5" />
                 </div>
                 <div>
-                  <h2 id="quote-modal-title" className="text-base sm:text-lg font-bold text-foreground leading-tight">
+                  <h2 id="quote-modal-title" className="text-base sm:text-lg font-black text-foreground leading-tight">
                     Instant Quote &amp; Booking
                   </h2>
-                  <p className="text-[11px] text-muted-foreground">
-                    Pretoria &amp; Gauteng • Fast WhatsApp Confirmation
+                  <p className="text-[11px] text-muted-foreground font-medium">
+                    Pretoria &amp; Gauteng • Instant WhatsApp Dispatch
                   </p>
                 </div>
               </div>
@@ -174,25 +191,25 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
               </button>
             </div>
 
-            {/* Form or Thank You Confirmation */}
+            {/* Form or Confirmation */}
             {isSubmitted ? (
               <div className="p-8 text-center space-y-3">
-                <div className="h-12 w-12 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="h-7 w-7" />
+                <div className="h-14 w-14 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/20">
+                  <CheckCircle2 className="h-8 w-8" />
                 </div>
-                <h3 className="text-lg font-bold text-foreground">Thank You, {fullName || "Event Host"}!</h3>
-                <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-                  Your quote request has been sent to Wandile on WhatsApp. We will confirm your date and equipment package shortly.
+                <h3 className="text-xl font-black text-foreground">Thank You, {fullName || "Event Host"}!</h3>
+                <p className="text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                  Your quote request has been generated and dispatched to Wandile on WhatsApp. We will confirm your date and package shortly.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleWhatsAppBooking} className="p-5 sm:p-6 space-y-4">
+              <form onSubmit={handleWhatsAppBooking} className="p-5 sm:p-6 space-y-4 max-h-[80vh] overflow-y-auto">
                 {/* Step 1: Equipment Selection */}
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   <label className="block text-[11px] font-bold uppercase tracking-wider text-foreground">
-                    1. Select Equipment to Hire:
+                    1. Select Equipment:
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 gap-2">
                     {SERVICES.map((s) => {
                       const isSelected = selectedItems.includes(s.id);
                       return (
@@ -201,26 +218,31 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
                           key={s.id}
                           disabled={isSubmitting}
                           onClick={() => toggleItem(s.id)}
-                          className={`flex items-center justify-between p-2.5 rounded-xl border text-left transition-all cursor-pointer disabled:opacity-60 ${
+                          className={`flex items-center justify-between p-3 rounded-2xl border text-left transition-all cursor-pointer disabled:opacity-60 ${
                             isSelected
                               ? "border-blue-600 bg-blue-500/10 shadow-xs ring-1 ring-blue-500/20"
                               : "border-border/70 bg-background/60 hover:bg-accent/40"
                           }`}
                         >
-                          <div className="flex items-center gap-2 min-w-0">
+                          <div className="flex items-center gap-3 min-w-0">
                             <div className="shrink-0">{getServiceIcon(s.id)}</div>
-                            <span className="text-xs font-bold text-foreground truncate">
-                              {s.name}
-                            </span>
+                            <div>
+                              <span className="text-xs font-black text-foreground block truncate">
+                                {s.name}
+                              </span>
+                              <span className="text-[10px] text-muted-foreground block truncate">
+                                {s.tagline}
+                              </span>
+                            </div>
                           </div>
                           <div
-                            className={`h-4 w-4 rounded-full flex items-center justify-center border shrink-0 ml-2 ${
+                            className={`h-5 w-5 rounded-full flex items-center justify-center border shrink-0 ml-2 ${
                               isSelected
                                 ? "bg-blue-600 border-blue-600 text-white"
                                 : "border-muted-foreground/30 bg-background"
                             }`}
                           >
-                            {isSelected && <Check className="h-3 w-3 stroke-[3]" />}
+                            {isSelected && <Check className="h-3.5 w-3.5 stroke-[3]" />}
                           </div>
                         </button>
                       );
@@ -228,16 +250,84 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
                   </div>
                 </div>
 
-                {/* Step 2: Client & Event Details */}
-                <div className="space-y-2.5 pt-2 border-t border-border/50">
+                {/* Step 2: Event Type */}
+                <div className="space-y-1.5 pt-2 border-t border-border/50">
                   <label className="block text-[11px] font-bold uppercase tracking-wider text-foreground">
-                    2. Your Details:
+                    2. Event Type:
+                  </label>
+                  <select
+                    value={eventType}
+                    onChange={(e) => setEventType(e.target.value)}
+                    className="w-full h-10 px-3 text-xs rounded-xl bg-background border border-border/80 text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                  >
+                    {EVENT_TYPES.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Step 3: Location Chips & Date */}
+                <div className="space-y-2 pt-2 border-t border-border/50">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-foreground">
+                    3. Delivery Area &amp; Date:
                   </label>
 
+                  <div className="flex flex-wrap gap-1.5">
+                    {POPULAR_TOWNSHIPS.map((town) => (
+                      <button
+                        type="button"
+                        key={town}
+                        onClick={() => setLocation(town)}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all cursor-pointer border ${
+                          location === town
+                            ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                            : "bg-muted/60 text-muted-foreground border-border/60 hover:text-foreground"
+                        }`}
+                      >
+                        {town}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                    <div>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">
+                        Exact Suburb / Address *
+                      </label>
+                      <Input
+                        required
+                        disabled={isSubmitting}
+                        placeholder="e.g. Soshanguve Block L"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        className="h-9 px-3 text-xs"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">
+                        Event Date *
+                      </label>
+                      <Input
+                        required
+                        disabled={isSubmitting}
+                        type="date"
+                        value={eventDate}
+                        onChange={(e) => setEventDate(e.target.value)}
+                        className="h-9 px-3 text-xs"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 4: Contact Details */}
+                <div className="space-y-2.5 pt-2 border-t border-border/50">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label className="block text-[11px] font-semibold text-muted-foreground mb-1">
-                        Full Name *
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">
+                        Your Full Name *
                       </label>
                       <Input
                         required
@@ -250,8 +340,8 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-semibold text-muted-foreground mb-1">
-                        WhatsApp / Phone *
+                      <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">
+                        WhatsApp Number *
                       </label>
                       <Input
                         required
@@ -262,43 +352,15 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
                         className="h-9 px-3 text-xs"
                       />
                     </div>
-
-                    <div>
-                      <label className="block text-[11px] font-semibold text-muted-foreground mb-1">
-                        Event Date *
-                      </label>
-                      <Input
-                        required
-                        disabled={isSubmitting}
-                        type="date"
-                        value={eventDate}
-                        onChange={(e) => setEventDate(e.target.value)}
-                        className="h-9 px-3 text-xs"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-semibold text-muted-foreground mb-1">
-                        Venue Location *
-                      </label>
-                      <Input
-                        required
-                        disabled={isSubmitting}
-                        placeholder="e.g. Soshanguve, Pretoria"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        className="h-9 px-3 text-xs"
-                      />
-                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-semibold text-muted-foreground mb-1">
-                      Special Notes / Timing (Optional)
+                    <label className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">
+                      Special Notes (Optional)
                     </label>
                     <Textarea
                       disabled={isSubmitting}
-                      placeholder="Guest count, delivery time preference..."
+                      placeholder="e.g. Early 06:00 AM delivery needed, generator available..."
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       rows={2}
@@ -307,27 +369,27 @@ _Please confirm availability and quotation for prompt 06:00 AM delivery._`;
                   </div>
                 </div>
 
-                {/* Submit CTA - Short text with loader */}
-                <div className="pt-1">
+                {/* Submit CTA */}
+                <div className="pt-2 space-y-2">
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-11 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm gap-2 shadow-lg shadow-blue-600/25 cursor-pointer disabled:opacity-80"
+                    className="w-full h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm gap-2 shadow-lg shadow-emerald-600/25 cursor-pointer transition-all"
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" />
-                        <span>Sending...</span>
+                        <span>Generating Quote...</span>
                       </>
                     ) : (
                       <>
-                        <Send className="h-4 w-4" />
-                        <span>Send</span>
+                        <MessageCircle className="h-5 w-5" />
+                        <span>Send to WhatsApp (+27 76 707 6120)</span>
                       </>
                     )}
                   </Button>
-                  <p className="text-[10px] text-center text-muted-foreground mt-1.5">
-                    Mon-Sun: 06:00 - 20:00 • Fast confirmation • Pretoria &amp; Gauteng
+                  <p className="text-[10px] text-center text-muted-foreground">
+                    ⚡ Fast response from Wandile within 15 minutes • Guaranteed morning delivery
                   </p>
                 </div>
               </form>
